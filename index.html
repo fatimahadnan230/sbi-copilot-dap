@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBI Co-Pilot: Agentic Digital Adoption</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. THE SETUP */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #020617;
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 40px 0;
+            place-items: center;
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #00122e; /* Deep SBI Blue Variant */
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+        }
+
+        /* 1.1 BACKGROUND DECORATION */
+        .slide-container::before {
+            background: radial-gradient(circle at 0% 0%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(30, 64, 175, 0.2) 0%, transparent 50%);
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .slide-container::after {
+            content: 'SBI Co-Pilot | Confidential';
+            position: absolute;
+            bottom: 25px;
+            right: 40px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 2. TYPOGRAPHY */
+        .slide-container h1, 
+        .slide-container h2, 
+        .slide-container h3 {
+            color: #f8fafc;
+            font-family: 'Urbanist', sans-serif;
+            margin: 0;
+        }
+
+        .slide-container .slide-title {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: left;
+            width: 100%;
+            color: #ffffff;
+            border-left: 8px solid #38bdf8;
+            padding-left: 20px;
+            line-height: 1.1;
+        }
+
+        .slide-container h1 {
+            font-size: 80px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .slide-container h1 span {
+            color: #38bdf8;
+        }
+
+        .slide-container p, 
+        .slide-container li,
+        .slide-container td,
+        .slide-container th {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        .slide-container .subtitle {
+            font-size: 28px;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 3. LAYOUT DEFINITIONS */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tiled-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .tile {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .tile .icon {
+            font-size: 50px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 25px;
+        }
+
+        .bullet-list i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: #38bdf8;
+            font-size: 24px;
+        }
+
+        .bullet-list strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* TABLE STYLES */
+        .table-layout {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 24px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        /* TIMELINE */
+        .timeline-layout {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .timeline-line {
+            background-color: rgba(56, 189, 248, 0.2);
+            height: 4px;
+            left: 0;
+            position: absolute;
+            top: 30px;
+            width: 100%;
+        }
+
+        .timeline-item {
+            position: relative;
+            text-align: center;
+            width: 23%;
+        }
+
+        .timeline-item::after {
+            background-color: #00122e;
+            border: 4px solid #38bdf8;
+            border-radius: 50%;
+            content: '';
+            height: 20px;
+            left: 50%;
+            position: absolute;
+            top: 22px;
+            transform: translateX(-50%);
+            width: 20px;
+            z-index: 2;
+        }
+
+        .timeline-item h3 {
+            margin-top: 60px;
+            font-size: 24px;
+        }
+
+        /* BLEED IMAGE */
+        .slide-container.bleed-image-layout {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 0;
+            align-items: start;
+        }
+
+        .bleed-image-layout .content-container {
+            padding: 60px;
+        }
+
+        .bleed-image-layout .image-container {
+            height: 720px;
+            width: 100%;
+        }
+
+        .bleed-image-layout img.bleed-image-side {
+            height: 720px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* CHARTS */
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bar .label {
+            flex: 0 0 300px;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .bar-inner {
+            background: rgba(255, 255, 255, 0.1);
+            height: 40px;
+            flex-grow: 1;
+            border-radius: 6px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* HIGHLIGHT NUMBERS */
+        .highlight-numbers-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .number-col {
+            text-align: center;
+        }
+
+        .big-number {
+            font-size: 160px;
+            font-weight: 700;
+            color: #38bdf8;
+            line-height: 1;
+        }
+
+        .number-label {
+            font-size: 28px;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .section-title-layout {
+            text-align: center;
+        }
+
+        .section-title-layout hr {
+            width: 100px;
+            border: 3px solid #38bdf8;
+            margin: 30px auto;
+        }
+
+        .section-title-layout h2 {
+            font-size: 72px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>SBI <span>Co-Pilot</span></h1>
+        <p class="subtitle">Next-Gen Agentic Digital Adoption Platform</p>
+        <p style="margin-top: 50px; font-weight: 500; letter-spacing: 2px;">AGENTIC AI & EMERGING TECH | 2026</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">The Digital Adoption Gap</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p>Despite massive YONO reach, millions of customers—rural and senior demographics—struggle with complex UI menus and financial jargon.</p>
+                <ul class="bullet-list">
+                    <li><i class="fa-solid fa-circle-exclamation"></i><strong>High Friction</strong> Multi-step forms lead to high session drop-offs.</li>
+                    <li><i class="fa-solid fa-language"></i><strong>Language Barriers</strong> Lack of intuitive, vernacular-first execution.</li>
+                    <li><i class="fa-solid fa-users"></i><strong>Fragmented Mastery</strong> One-time seminars fail to drive sustainable usage.</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=600&auto=format&fit=crop" alt="Rural Indian person using smartphone">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide3">
+    <div class="section-title-layout">
+        <hr>
+        <h2>The Solution</h2>
+        <p class="subtitle">Moving from Static UI to Autonomous Guidance</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Pillars of Digital Mastery</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-microphone-lines"></i></div>
+                <h3>Vernacular First</h3>
+                <p>Voice-to-Action mapping using Bhashini API for regional intent execution.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Predictive Help</h3>
+                <p>Real-time friction detection sensing pauses and navigation backtracking.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-id-card-clip"></i></div>
+                <h3>Role Adaptive</h3>
+                <p>Dynamic persona shifting for Retail Users vs. MSME Power Users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Our Unique Advantages</h2>
+    <div class="content-area">
+        <ul class="bullet-list">
+            <li><i class="fa-solid fa-shield-check"></i><strong>Self-Healing Guidance</strong> AI-sensing overlays that adapt to UI changes without requiring code updates.</li>
+            <li><i class="fa-solid fa-ghost"></i><strong>Ghost-Guiding</strong> Non-intrusive visual pulses that lead users through complex banking workflows.</li>
+            <li><i class="fa-solid fa-vault"></i><strong>Privacy-First Architecture</strong> Quantized LLMs running inside SBI's secure on-premise cloud.</li>
+            <li><i class="fa-solid fa-chart-line"></i><strong>Behavioral Interventions</strong> Predictive nudges triggered before a user abandons a transaction.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Advanced Tech Architecture</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Component</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Agentic Core</strong></td>
+                        <td>LangGraph / CrewAI</td>
+                        <td>Multi-agent deterministic state coordination.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reasoning</strong></td>
+                        <td>Mistral-7B / Llama-3</td>
+                        <td>On-premise financial intent parsing.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telemetry</strong></td>
+                        <td>Kafka / ClickHouse</td>
+                        <td>Real-time user friction & event streaming.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Voice</strong></td>
+                        <td>Bhashini API</td>
+                        <td>Vernacular speech-to-intent mapping.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Agentic Execution Workflow</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <h3>Ingest</h3>
+                <p>Stream real-time interaction & telemetry events.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Detect</h3>
+                <p>Friction Agent flags navigation bottlenecks.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Guide</h3>
+                <p>UI-Sensing Agent deploys contextual tooltips.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Confirm</h3>
+                <p>Secure biometric auth before final API execution.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container bleed-image-layout" id="slide8">
+    <div class="content-container">
+        <h2 class="slide-title">Friction Analytics Layer</h2>
+        <div class="content-area">
+            <p>Our <strong>Friction-Predictive Agent</strong> tracks cursor hesitation and input backtracking to identify struggle points before drop-off.</p>
+            <p>By mapping behavioral data to dashboard insights, SBI Co-Pilot ensures long-term user mastery through proactive, human-centric interventions.</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=1280&auto=format&fit=crop" alt="Financial analytics dashboard">
+    </div>
+</div>
+
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Strategic Commercial Impact</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="tile" style="text-align: left;">
+                <h3 style="color:#38bdf8">Cost Reduction</h3>
+                <p>Dramatically lowers branch operational overhead by migrating high-volume retail product setups to digital-only autonomous paths.</p>
+            </div>
+            <div class="tile" style="text-align: left;">
+                <h3 style="color:#38bdf8">Revenue Acceleration</h3>
+                <p>Increases baseline adoption for high-margin products (Insurance, Mutual Funds) through proactive, contextual upselling nudges.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Quantifiable Outcomes</h2>
+    <div class="content-area">
+        <div class="highlight-numbers-layout">
+            <div class="number-col">
+                <div class="big-number">90%</div>
+                <div class="number-label">Onboarding Support Drop</div>
+            </div>
+            <div>
+                <h3>Efficiency Redefined</h3>
+                <p>By automating the digital onboarding journey for complex products, SBI can offload repetitive KYC and product configuration queries from physical bank branches, saving thousands of man-hours per quarter.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Projected Digital Adoption Lift</h2>
+    <div class="content-area">
+        <div class="chart-container">
+            <div class="bar">
+                <div class="label" style="color: #fff; font-weight: bold;">Traditional UI Only</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 42%; background: linear-gradient(90deg, #475569, #64748b);">42%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label" style="color: #fff; font-weight: bold;">Static Tooltips (WalkMe Style)</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 58%; background: linear-gradient(90deg, #0ea5e9, #38bdf8);">58%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label" style="color: #fff; font-weight: bold;">SBI Co-Pilot (Agentic)</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 94%; background: #38bdf8; color: #00122e;">94%</div></div>
+            </div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; color: #38bdf8; font-weight: 600;">Autonomous agentic intervention creates a 2.2X increase in sustainable adoption.</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide12">
+    <div class="section-title-layout">
+        <h1 style="font-size: 100px;">THANK <span>YOU</span></h1>
+        <p class="subtitle">Questions? Let's drive digital inclusion together.</p>
+        <p style="margin-top: 40px; font-weight: 500; color: #fff;">[Your Team Name] | SBI GFF Hackathon</p>
+    </div>
+</div>
+
+</body>
+</html>
